@@ -45,7 +45,7 @@ ARG GID
 
 ## Basis ##
 ENV ENV=prod \
-    PORT=8080 \
+    PORT=80 \
     # pass build args to the build
     USE_OLLAMA_DOCKER=${USE_OLLAMA} \
     USE_CUDA_DOCKER=${USE_CUDA} \
@@ -153,7 +153,7 @@ COPY --chown=$UID:$GID ./backend .
 
 EXPOSE 80
 
-HEALTHCHECK CMD curl --silent --fail http://localhost:${PORT:-8080}/health | jq -ne 'input.status == true' || exit 1
+HEALTHCHECK CMD curl --silent --fail http://localhost:${PORT:-80}/health | jq -ne 'input.status == true' || exit 1
 
 USER $UID:$GID
 
